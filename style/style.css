@@ -52,3 +52,29 @@ body{
 
 }
 
+.choice-item{
+    padding: 15px;
+    box-shadow: 0 0 10px 0 rgba(255,255,255,1);
+    border-radius: 10px;
+    display: inline-block;
+    height: 80px;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.choice-item:hover{
+    background: rgba(255,255,255,.2);
+
+}
+
+.choice-item img{
+    width: 30px;
+}
+
+.next-round-btn{
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(255,255,255,1);
+    cursor: pointer;
+}
+
