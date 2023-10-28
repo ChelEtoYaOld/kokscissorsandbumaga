@@ -17,3 +17,76 @@ const generateAi = () => {
 }
 
 interval = setInterval(generateAi, opt.interval)
+
+userChoiceItem.forEach(elem => {
+    elem.addEventListener('click', () => {
+        clearInterval(interval)
+        let userChoice = elem.firstElementChild.getAttribute('src')
+        userImg.setAttribute('src', userChoice)
+        let userNum = parseInt(userChoice.match(/\d/))
+        let aiNum = parseInt(aiImg.getAttribute('src').match(/\d/))
+
+        ui()
+
+        opt.turnsAi.push(aiNum)
+        opt.turnsUser.push(userNum)  
+        checkWinner(opt.turnsUser[opt.turnsUser.lenght - 1],opt.turnsAi[turnsAi.lenght - 1])
+
+    })
+})
+
+const userButtons = (value) => {
+    userChoiceItem.forEach(elem => {
+        elem.style.display = value
+    })
+}
+
+const ui = () => {
+    userButtons('none')
+    const userChoiceWrap = document.querySelector('.choice-wrap')
+    const nextRoundButton = document.createElement('button')
+    nextRoundButton.classList.add('next-round-btn')
+    nextRoundButton.innerHTML = 'Next Round'
+    userChoiceWrap.append(nextRoundButton)
+}
+
+const checkWinner = (user, ai) => {
+    let userScore = document.querySelector('.user-score')
+    let aiScore = document.querySelector('.ai-score')
+    let winner = document.querySelector('.winner')
+    let nextButton = document.querySelector('.next-round-btn')
+    if(user === ai) {
+        winner.innerHTML = "It's tie!!"
+    }
+    if(user === 1){
+        if(ai === 2){
+            opt.aiScore++
+        }else{
+            opt.userScore++
+        }
+    }else if(user === 2){
+        if(ai === 3){
+            opt.aiScore++
+        }else{
+            opt.userScore++
+        }
+    }else if(user === 3){
+        if(ai === 1){
+            opt.aiScore++
+        }else{
+            opt.userScore++
+        }
+    }
+
+    userScore.innerHTML = `User: ${opt.userScore}`
+    aiScore.innerHTML = `Ai: ${opt.aiScore}`
+
+    nextButton.addEventListener('click', (e) => {
+        document.querySelector('.next-round-btn').remove()
+        userButtons('block')
+        document.querySelector('.user-choice-main img').src = './kartinki/q.png'
+        interval = setInterval(generateAi , opt.interval)
+    
+    })
+
+}   
